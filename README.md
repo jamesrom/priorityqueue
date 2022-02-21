@@ -4,7 +4,7 @@ A fast, generic, thread safe priority queue for Go 1.18+.
 ## Features
 
  - Minimal API
- - Generic initializers – anything that can be ordered can be put into the queue.
+ - Generic initializers – anything that can be ordered can be put into the queue
  - Built-in thread safety
  - Speed – see benchmarks
 
@@ -18,7 +18,7 @@ A fast, generic, thread safe priority queue for Go 1.18+.
 The priority queue implements a binary heap (using `container/heap` from the standard library).
 
 ### Benchmarks
-A priority queue is populated to a given size, then we measure the performance of performing Push/Pop/Peek.
+A priority queue is populated to a given size, we then measure the performance of Push/Pop/Peek.
 <p align="center">
  
 ![image](https://user-images.githubusercontent.com/539129/154957192-eefdfd1b-bcd8-4af5-9156-43b16cb614b7.png)
