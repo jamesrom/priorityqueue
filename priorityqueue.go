@@ -15,22 +15,30 @@ type Prioritizable interface {
 	Priority() int
 }
 
+// New - highest priority / descending order
 func New[T Prioritizable](items ...T) *PriorityQueue[T] {
-	defaultComparator := func(i, j T) bool {
+	greater := func(i, j T) bool {
 		return i.Priority() > j.Priority()
 	}
-	return NewWithComparator(defaultComparator, items...)
+	return NewWithComparator(greater, items...)
 }
 
+// NewWithOrderable - highest priority / descending order
 func NewWithOrderable[T constraints.Ordered](items ...T) *PriorityQueue[T] {
-	defaultComparator := func(a, b T) bool { return a > b }
-	return NewWithComparator(defaultComparator, items...)
+	greater := func(a, b T) bool { return a > b }
+	return NewWithComparator(greater, items...)
 }
 
-func NewWithComparator[T any](fn func(T, T) bool, items ...T) *PriorityQueue[T] {
+// Less must describe a transitive ordering:
+//  - if both Less(i, j) and Less(j, k) are true, then Less(i, k) must be true as well.
+//  - if both Less(i, j) and Less(j, k) are false, then Less(i, k) must be false as well.
+type Less[T any] func(T, T) bool
+
+// NewWithComparator - order defined by a custom less function
+func NewWithComparator[T any](fn Less[T], items ...T) *PriorityQueue[T] {
 	h := heap[T]{
-		elements:   items,
-		comparator: fn,
+		elements: items,
+		less:     fn,
 	}
 	hp.Init(&h)
 	return &PriorityQueue[T]{h: h}

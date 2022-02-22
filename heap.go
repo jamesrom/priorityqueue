@@ -2,8 +2,8 @@ package priorityqueue
 
 // implements heap.Interface
 type heap[T any] struct {
-	elements   []T
-	comparator func(T, T) bool
+	elements []T
+	less     func(T, T) bool
 }
 
 func (h *heap[T]) Len() int {
@@ -15,7 +15,7 @@ func (h *heap[T]) Push(x any) {
 }
 
 func (h *heap[T]) Less(i, j int) bool {
-	return h.comparator(h.elements[i], h.elements[j])
+	return h.less(h.elements[i], h.elements[j])
 }
 
 // Pop is called after the first element is swapped with the last
