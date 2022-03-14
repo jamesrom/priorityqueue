@@ -1,3 +1,6 @@
+# DEPRECATION NOTICE
+Please note this package can now be found at https://github.com/jamesrom/order
+
 # priorityqueue
 A fast, generic, thread safe priority queue for Go 1.18+.
 
@@ -20,9 +23,9 @@ The priority queue implements a binary heap (using `container/heap` from the sta
 ### Benchmarks
 A priority queue is populated to a given size, we then measure the performance of Push/Pop/Peek.
 <p align="center">
- 
+
 ![image](https://user-images.githubusercontent.com/539129/154957192-eefdfd1b-bcd8-4af5-9156-43b16cb614b7.png)
- 
+
 </p>
 
 Two benchmarks for Push are measured: PushMin pushes the lowest priority item into the queue, which represents the _best-case_ swim-up scenario. Conversely, PushMax pushes the highest priority item into the queue, which represents the _worst-case_ swim-up scenario.
